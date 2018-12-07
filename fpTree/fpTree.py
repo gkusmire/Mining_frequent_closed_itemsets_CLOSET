@@ -7,16 +7,20 @@ class FPTree:
         self.rootNode = Node(FrequentItem("null"))
         self.frequentItems = frequent_items_
 
-    # TODO sorting of itemset
-    def sort(self, itemset_):
-        return itemset_
+
+    def prepare(self, itemset):
+        sorted_list = []
+        for element in self.frequentItems.items:
+            if element.name in itemset:
+                sorted_list.append(element)
+
+        return sorted_list
 
     def add_itemset(self, itemset):
-        sorted_itemset = self.sort(itemset)
+        sorted_itemset = self.prepare(itemset)
         actual_node = self.rootNode
 
-        for item in sorted_itemset:
-            element = self.frequentItems.get(item)
+        for element in sorted_itemset:
 
             if actual_node.get_children(element) is None:
                 node = Node(element)

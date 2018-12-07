@@ -23,3 +23,8 @@ class FrequentItemSet:
             self.add(name)
         else:
             self.get(name).increment_counter()
+
+    def remove_not_frequent_items(self, min_supp):
+        for element in self.items:
+            if element.frequent_counter < min_supp:
+                self.items.remove(element)

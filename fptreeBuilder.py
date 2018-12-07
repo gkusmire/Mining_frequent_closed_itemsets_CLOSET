@@ -5,8 +5,9 @@ from Mining_frequent_closed_itemsets_CLOSET.fpTree.frequentItemset import Freque
 
 
 class FPTreeBuilder:
-    def __init__(self, file_name):
+    def __init__(self, file_name, min_support):
         self.file_name = file_name
+        self.min_support = min_support
 
     def get_fptree(self):
         frequent_items = self.get_frequent_itemset()
@@ -18,14 +19,15 @@ class FPTreeBuilder:
 
         with open(self.file_name, 'r') as file:
             reader = csv.reader(file, delimiter=',')
-            first_line = True
+            transaction_counter = 0
             for row in reader:
-                if first_line is True:
-                    first_line = False
+                if transaction_counter == 0:
+                    transaction_counter += 1
                 else:
                     for item in row:
                         itemset.add(item)
-
+                        transaction_counter += 1
+        itemset.remove_not_frequent_items(self.min_support * transaction_counter)
         return itemset
 
     def build_fptree(self, frequent_itemset):
