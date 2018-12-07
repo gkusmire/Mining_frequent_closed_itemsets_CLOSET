@@ -1,13 +1,18 @@
 class Node:
-
-    def __init__(self, name_, node_link_):
-        self.name = name_
-        self.node_link = node_link_
+    def __init__(self, item_):
+        self.item = item_
+        self.node_link = None
         self.counter = 0
         self.childrenNodes = []
 
-    def incrementCounter(self):
+    def increment_counter(self):
         self.counter += 1
 
-    def addChildren(self, node):
+    def add_children(self, node):
         self.childrenNodes.append(node)
+
+    def get_children(self, item_element):
+        for child in self.childrenNodes:
+            if child.item is item_element:
+                return child
+        return None

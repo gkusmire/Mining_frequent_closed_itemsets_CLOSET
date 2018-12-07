@@ -1,9 +1,6 @@
-from builtins import print
+from Mining_frequent_closed_itemsets_CLOSET.fptreeBuilder import FPTreeBuilder
 
-from Mining_frequent_closed_itemsets_CLOSET.fpTree.fpTreeNode import Node
+a = FPTreeBuilder('a.csv')
 
-node = Node("aaa", "asd")
-
-
-print(node.counter)
-
+t = a.get_fptree()
+print(t.rootNode.childrenNodes[0].item.name)
