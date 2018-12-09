@@ -3,6 +3,7 @@ class Node:
         self.item = item_
         self.node_link = None
         self.counter = 0
+        self.parent_link = None
         self.childrenNodes = []
 
     def increment_counter(self):

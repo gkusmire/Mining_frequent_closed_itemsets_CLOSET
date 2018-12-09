@@ -12,11 +12,18 @@ class FrequentItemSet:
                 return item
         return None
 
-    def add(self, name):
-        self.items.append(FrequentItem(name))
+    def add(self, name, frequency=1):
+        item = self.get(name)
+        if item is None:
+            self.items.append(FrequentItem(name, frequency))
+        else:
+            item.increment_counter(frequency)
 
     def sort_descending(self):
         self.items.sort(key=lambda item: item.frequent_counter, reverse=True)
+
+    def sort_ascending(self):
+        self.items.sort(key=lambda item: item.frequent_counter, reverse=False)
 
     def register_item(self, name):
         if self.get(name) is None:
@@ -27,4 +34,9 @@ class FrequentItemSet:
     def remove_not_frequent_items(self, min_supp):
         for element in self.items:
             if element.frequent_counter < min_supp:
+                self.items.remove(element)
+
+    def delete(self, item):
+        for element in self.items:
+            if element.name == item.name:
                 self.items.remove(element)
